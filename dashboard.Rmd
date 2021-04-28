@@ -1,0 +1,56 @@
+---
+title: "Calorie and  Nutrients comsuption - `r str_to_title(param)`"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+---
+
+
+```{r, echo=F}
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+p1 = result[[2]] %>%
+        ggplot() +
+        aes(x = Date, y = Calories) +
+        geom_line(size = 1.6, colour = "#cb181d") +
+        labs(x = "Time", y = "Calorie", title = "", subtitle = "Daily")+
+        theme_minimal()
+p1 = p1 + expand_limits(y = 0)
+x <- result[[2]] %>% mutate(Date=factor(Date)) %>% select(- Calories) %>% gather( .,Nutrients, Total, Protein:Fat, factor_key=TRUE)
+p2 =    x %>% ggplot(.) +
+        aes(x = Date, fill = Nutrients, weight = Total) +
+        geom_bar(position = "fill")
+```
+
+Dashboard
+=======================================================================
+
+
+### Calorie Intake Over Time
+
+```{r, echo=F, }
+ggplotly(p1)
+```
+
+### Macro-Nutrients Ratio
+
+```{r, echo=F, }
+ggplotly(p2)
+```
+
+
+
+Raw Data
+=======================================================================
+
+
+### Aggregated
+
+```{r, echo=F, }
+result[[2]] %>% Kable
+```
+### Full
+
+```{r, echo=F, }
+result[[1]] %>% Kable
+```

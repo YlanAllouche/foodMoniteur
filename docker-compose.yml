@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  plumber:
+      build:
+          dockerfile: ./Dockerfile
+          context: .
+      image: healthmoniteur
+      container_name: healthmoniteur
+      volumes:
+      - /data/Libraries/Documents/:/data
+      ports:
+      - 80:80
+
