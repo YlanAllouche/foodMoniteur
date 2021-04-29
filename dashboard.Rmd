@@ -1,5 +1,5 @@
 ---
-title: "Calorie and  Nutrients comsuption - `r str_to_title(param)`"
+title: "`r str_to_title(param)`"
 output:
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -20,6 +20,15 @@ x <- result[[2]] %>% mutate(Date=factor(Date)) %>% select(- Calories) %>% gather
 p2 =    x %>% ggplot(.) +
         aes(x = Date, fill = Nutrients, weight = Total) +
         geom_bar(position = "fill")
+
+p3 = result[[1]] %>%
+        group_by(Name) %>%
+        dplyr::summarise(Calories=sum(Calories)) %>%
+        arrange(- Calories) %>%
+  ggplot(.) +
+  aes(x = Name, weight = Calories) +
+  geom_bar(fill = "#B22222") +
+  labs(title = "Food consumed total")
 ```
 
 Dashboard
@@ -36,6 +45,12 @@ ggplotly(p1)
 
 ```{r, echo=F, }
 ggplotly(p2)
+```
+
+### Food
+
+```{r, echo=F, }
+ggplotly(p3)
 ```
 
 
