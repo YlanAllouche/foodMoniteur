@@ -7,7 +7,7 @@ services:
       image: healthmoniteur
       container_name: healthmoniteur
       volumes:
-      - /data/Libraries/Documents/:/data
+      - /data/Libraries/Documents/diet/:/data
       ports:
       - 80:80
 
