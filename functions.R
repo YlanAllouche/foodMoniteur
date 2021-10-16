@@ -21,3 +21,5 @@ Kable <- function(df) {
                 kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 }
 
+
+

@@ -31,15 +31,28 @@ p3 = result[[1]] %>%
   labs(title = "Food consumed total")
 ```
 
-Dashboard
+Overview
 =======================================================================
 
+### Body Measurments
+
+```{r, echo=F, }
+
+body_data = read.xlsx(origin, "measurements", detectDates = T) %>% melt(., measure.vars = 2:6)
+names(body_data) <- c("Date", "Area", "Value")
+body_monitor =  body_data %>% ggplot(., aes(x=Date, y=Value, group=Area, color=Area)) + geom_line() 
+ggplotly(body_monitor)
+
+```
 
 ### Calorie Intake Over Time
 
 ```{r, echo=F, }
 ggplotly(p1)
 ```
+
+Detail
+=======================================================================
 
 ### Macro-Nutrients Ratio
 
@@ -55,17 +68,5 @@ ggplotly(p3)
 
 
 
-Raw Data
-=======================================================================
 
 
-### Aggregated
-
-```{r, echo=F, }
-result[[2]] %>% Kable
-```
-### Full
-
-```{r, echo=F, }
-result[[1]] %>% Kable
-```

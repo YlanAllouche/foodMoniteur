@@ -10,6 +10,8 @@ library(esquisse)
 library(plotly)
 library(flexdashboard)
 library(shinydashboard)
+library(reshape2)
+library(openxlsx)
 
 setwd("/app")
 source("functions.R")
