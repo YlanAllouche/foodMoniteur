@@ -38,7 +38,7 @@ Overview
 
 ```{r, echo=F, }
 
-body_data = read.xlsx(origin, "measurements", detectDates = T) %>% melt(., measure.vars = 2:length((.)
+body_data = read.xlsx(origin, "measurements", detectDates = T) %>% melt(., measure.vars = 2:length(.))
 names(body_data) <- c("Date", "Area", "Value")
 body_monitor =  body_data %>% ggplot(., aes(x=Date, y=Value, group=Area, color=Area)) + geom_line()
 ggplotly(body_monitor)
